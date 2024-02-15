@@ -8,7 +8,7 @@ local Spell = awful.Spell
 awful.Populate({
     Intellect = Spell(1460,{beneficial = true, castByID = true }),
     FrostShield = Spell(7301,{beneficial = true, castByID = true }),
-    Evocation = Spell(12051,{beneficial = true, castByID = true }),
+    Evocation = Spell(12051,{castByID = true }),
     FrostNova = Spell(865,{castByID = true, ranged = true }),
     LivingFlame = Spell(401556,{castByID = true, ranged = true }),
     livingbomb = Spell(400613,{castByID = true, ranged = true }),
@@ -56,6 +56,7 @@ end)
 --Logic for casting Living Flame spell on enemies
 
 LivingFlame:Callback(function(spell)
+    if not spell:Castable(player) then return end
     if player.mana > 50 then
         local function sort(a, b) return a.hp > b.hp end
         awful.enemies.sort(sort).loop(function(unit, i, uptime)
@@ -105,6 +106,7 @@ FrostShield:Callback(function(spell)
 end)
 
 Evocation:Callback(function(spell)
+    if not spell:Castable(player) then return end
     if player.mana < 20 then
         spell:Cast()
     end

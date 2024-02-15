@@ -9,7 +9,7 @@ mage:Init(function()
     --buff's whenever you dont have them.
     Intellect(player)
     FrostShield(player)
-
+    Evocation(player)
 
     if target.enemy then
         if player.mana > 30 then
@@ -18,12 +18,9 @@ mage:Init(function()
         if player.mana > 50 then
             LivingFlame()
         end
-        if player.mana > 20 then
-            Evocation()
-        end
-        FrostNova()
-        Shoot()
+        --FrostNova()
+        --Shoot()
     end
 
 
-end) -- Fixed the missing 'end' and removed the extra ')' symbol
+end)
