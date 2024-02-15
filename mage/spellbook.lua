@@ -1,8 +1,10 @@
+-- Initialize necessary variables and objects for the spellbook
 local Unlocker, awful, project = ...
 local aoe = project.mage.aoe
 local player = awful.player
 local Spell = awful.Spell
 
+-- Populate the spellbook with spells and their configurations
 awful.Populate({
     Intellect = Spell(1460,{beneficial = true, castByID = true }),
     FrostShield = Spell(7301,{beneficial = true, castByID = true }),
@@ -18,13 +20,13 @@ awful.Populate({
 
 local targetedEnemies = {}
 
---This wipes the table when the player is out of combat and resets for a fresh pull
+--Reset the table of targeted enemies when out of combat
 
 awful.onEvent(function()
     targetedEnemies = {}
 end, "PLAYER_REGEN_ENABLED")
 
---adds any enemy that has living bomb applied to the table
+--Add enemies with living bomb applied to the targetedEnemies table
 
 awful.onEvent(function(info, event, source, dest)
     if event ~= "SPELL_AURA_APPLIED" then return end
@@ -35,7 +37,7 @@ awful.onEvent(function(info, event, source, dest)
     end
 end)
 
---living bomb logic 
+--Logic for casting Living Bomb spell on enemies
 
 livingbomb:Callback(function(spell)
     if player.mana > 30 then
@@ -51,7 +53,7 @@ livingbomb:Callback(function(spell)
     end
 end)
 
---Living Flame AOE Logic
+--Logic for casting Living Flame spell on enemies
 
 LivingFlame:Callback(function(spell)
     if player.mana > 50 then
@@ -66,7 +68,7 @@ LivingFlame:Callback(function(spell)
     end
 end)
 
--- root enemy
+--Root enemies with Frost Nova spell
 
 FrostNova:Callback(function(spell)
     if enemies.around(player, 5, enemy.meleeRangeOf(player)) >= 2 then
@@ -74,7 +76,7 @@ FrostNova:Callback(function(spell)
     end
 end)
 
---Damage Filler Spell's
+--damage filler spells
 
 Shoot:Callback(function(spell)
    if not spell.current then
