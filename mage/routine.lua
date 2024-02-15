@@ -6,7 +6,6 @@ print("Zmizet AoE Dungeon Mage")
 
 mage:Init(function()
 
-    --buff's whenever you dont have them.
     Intellect(player)
     FrostShield(player)
     Evocation(player)
