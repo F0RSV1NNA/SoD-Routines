@@ -1,0 +1,8 @@
+{
+    "load": [
+        "Zmizet.lua",
+        "routine.lua",
+        "spellbook.lua"
+    ]
+}
+
