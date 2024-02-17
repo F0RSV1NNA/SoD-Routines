@@ -79,15 +79,14 @@ end)
 
 --Root enemies with Frost Nova spell
 
-FrostNova:Callback(function(spell)
-    if awful.enemies.around(player, 5, player.meleeRangeOf(player)) >= 2 then
+FrostNova:Callback(function(spell) 
+    if awful.enemies.around(player, 5, player.meleeRangeOf(player)) >= 2 then -- this shit broke
         spell:Cast()
     end
 end)
 
-Polymorph:Callback(function(spell)
+Polymorph:Callback(function(spell) -- needs a ton more logic/improvement to be useful against players.
     awful.enemies.loop(function(enemy)
-        if enemy.hp > 20 then return end
         if spell:Cast(enemy, {face = true}) then
             return true
         end
@@ -116,7 +115,7 @@ end)
 
 Scorch:Callback(function(spell)
     if player.mana > 10 then
-        for i = 1, 5 do
+        for i = 1, 5 do -- cast 5 times?
             if not spell:Cast(target) then
                 return
             end
