@@ -17,8 +17,8 @@ mage:Init(function()
         if player.mana > 50 then
             LivingFlame()
         end
-        --FrostNova()
-        --Shoot()
+        --FrostNova() throwing massive error
+        --Shoot() just not working
     end
 
 
