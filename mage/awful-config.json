@@ -2,7 +2,8 @@
     "load": [
         "Zmizet.lua",
         "routine.lua",
-        "spellbook.lua"
+        "spellbook.lua",
+        "gui.lua"
     ]
 }
 
