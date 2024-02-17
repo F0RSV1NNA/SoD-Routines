@@ -9,9 +9,17 @@ awful.Populate({
     Intellect = Spell(1460,{beneficial = true, castByID = true }),
     FrostShield = Spell(7301,{beneficial = true, castByID = true }),
     Evocation = Spell(12051,{castByID = true }),
+    --cc
     FrostNova = Spell(865,{castByID = true, ranged = true }),
+    Polymorph = Spell(12824,{castByID = true, ranged = true }),
+    --AoE
     LivingFlame = Spell(401556,{castByID = true, ranged = true }),
     livingbomb = Spell(400613,{castByID = true, ranged = true }),
+    Blizzard = Spell(10,{castByID = true, ranged = true }),
+    --DMG
+    Pyroblast = Spell(11366,{castByID = true, ranged = true }),
+    Scorch = Spell(2948,{castByID = true, ranged = true }),
+    Combustion = Spell(400613,{castByID = true, ranged = true }),
     Shoot = Spell(5019,{castByID = true, ranged = true, targeted = true})
 }, aoe, getfenv(1))
 
@@ -72,18 +80,67 @@ end)
 --Root enemies with Frost Nova spell
 
 FrostNova:Callback(function(spell)
-    if enemies.around(player, 5, enemy.meleeRangeOf(player)) >= 2 then
+    if awful.enemies.around(player, 5, player.meleeRangeOf(player)) >= 2 then
         spell:Cast()
     end
 end)
 
+Polymorph:Callback(function(spell)
+    awful.enemies.loop(function(enemy)
+        if enemy.hp > 20 then return end
+        if spell:Cast(enemy, {face = true}) then
+            return true
+        end
+    end)
+end)
+
+
 --damage filler spells
 
-Shoot:Callback(function(spell)
-   if not spell.current then
-        spell:Cast()
-  end
+
+
+Pyroblast:Callback(function(spell) --improve this. its shit...i think.
+    if not spell:Castable(player) then return end
+    --[[if player.buff(spell.name) then
+        if spell:Cast(target) then
+            return true
+        end
+    end]]
+    if player.mana > 30 then
+        if spell:Cast(target) then
+            return true
+        end
+    end
 end)
+
+
+Scorch:Callback(function(spell)
+    if player.mana > 10 then
+        for i = 1, 5 do
+            if not spell:Cast(target) then
+                return
+            end
+        end
+    end
+end)
+
+
+Combustion:Callback(function(spell)
+    if player.mana > 50 then
+        if spell:Cast() then
+            return true
+        end
+    end
+end)
+
+Shoot:Callback(function(spell)
+    if player.mana > 5 then
+        if not spell.current then
+            spell:Cast()
+        end
+    end
+end)
+
 
 --buffs 
 
@@ -107,7 +164,9 @@ end)
 
 Evocation:Callback(function(spell)
     if not spell:Castable(player) then return end
-    if player.mana < 20 then
-        spell:Cast()
+    if player.mana < 5 then
+        if spell:Cast() then
+            return true
+        end
     end
 end)
