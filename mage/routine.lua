@@ -17,7 +17,8 @@ mage:Init(function()
 
     --Polymorph player
     if target.player then
-         Polymorph()
+        FrostNova()
+        Polymorph()
     end
 
 -- AoE Rotation    
@@ -33,10 +34,10 @@ mage:Init(function()
 -- Single target Rotation
     if not settings.AoE then
         if target.enemy then
-            Pyroblast()
-            Scorch()
-            Combustion()
-            Shoot()
+            --Pyroblast()
+            --Scorch()
+            --Combustion()
+            --Shoot()
         end
     end
 

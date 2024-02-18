@@ -5,16 +5,14 @@
 ## Working : 
 
 player buffs, Int,Shield\
-evocation when @ low mana\
 Living Flame AOE\
-Living bomb AOE
+Living bomb AOE\
+GUI On/OFF - AOE ON/OFF\
 
-## Not working:
-Literally everything else
-
-
-### to do:
-Add Pyroblast Proc ID's\
-Improve all spell logic\
-Add a simple AOE button to toggle AOE vs Single target rotation.\ 
-Adjust mana thresholds
+##to do.
+Fix Polymorph recasting on players\
+Fix Frost nova not casting/working\
+Sort out mana % values for proper order\
+Add blizzard Smart AOE Maybe\
+hit max level so i can add combustion + logic\
+Fix Evocation canceling the cast.

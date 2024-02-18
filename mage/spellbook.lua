@@ -1,10 +1,8 @@
--- Initialize necessary variables and objects for the spellbook
 local Unlocker, awful, project = ...
 local aoe = project.mage.aoe
 local player = awful.player
 local Spell = awful.Spell
 
--- Populate the spellbook with spells and their configurations
 awful.Populate({
     Intellect = Spell(1460,{beneficial = true, castByID = true }),
     FrostShield = Spell(7301,{beneficial = true, castByID = true }),
@@ -24,17 +22,14 @@ awful.Populate({
 }, aoe, getfenv(1))
 
 
---Table of enemies that have been targeted and living bomb applied to.
 
 local targetedEnemies = {}
 
---Reset the table of targeted enemies when out of combat
 
 awful.onEvent(function()
     targetedEnemies = {}
 end, "PLAYER_REGEN_ENABLED")
 
---Add enemies with living bomb applied to the targetedEnemies table
 
 awful.onEvent(function(info, event, source, dest)
     if event ~= "SPELL_AURA_APPLIED" then return end
@@ -45,7 +40,9 @@ awful.onEvent(function(info, event, source, dest)
     end
 end)
 
---Logic for casting Living Bomb spell on enemies
+
+
+--AOE
 
 livingbomb:Callback(function(spell)
     if player.manapct > 30 then
@@ -61,7 +58,6 @@ livingbomb:Callback(function(spell)
     end
 end)
 
---Logic for casting Living Flame spell on enemies
 
 LivingFlame:Callback(function(spell)
     if not spell:Castable(player) then return end
@@ -77,28 +73,30 @@ LivingFlame:Callback(function(spell)
     end
 end)
 
---Root enemies with Frost Nova spell
+
+
+--PvP
 
 FrostNova:Callback(function(spell) 
-    if awful.enemies.around(player, 5, player.meleeRangeOf(player)) >= 2 then -- this shit broke
+    if awful.enemies.around(player, 5, enemy.meleeRangeOf(player)) >= 2 then -- this shit broke "enemy"
         spell:Cast()
     end
 end)
 
-Polymorph:Callback(function(spell) -- needs a ton more logic/improvement to be useful against players.
-    awful.enemies.loop(function(enemy)
-        if spell:Cast(enemy, {face = true}) then
-            return true
-        end
-    end)
+Polymorph:Callback(function(spell) -- Constantly recasting. /double casting. Maybe needs to use the table like Living Bomb
+    if target.hp <= 70 then return end
+    if target.debuff(spell.id) then return end
+    if spell:Cast(target) then
+        return true
+    end
 end)
+
 
 
 --damage filler spells
 
 
-
-Pyroblast:Callback(function(spell) --improve this. its shit...i think.
+Pyroblast:Callback(function(spell) --needs improvement, would help if i ever saw pyroblast proc.
     if not spell:Castable(player) then return end
     --[[if player.buff(spell.name) then
         if spell:Cast(target) then
@@ -123,7 +121,6 @@ Scorch:Callback(function(spell)
     end
 end)
 
-
 Combustion:Callback(function(spell)
     if player.manapct > 50 then
         if spell:Cast() then
@@ -139,6 +136,10 @@ Shoot:Callback(function(spell)
         end
     end
 end)
+
+
+
+
 
 
 --buffs 
@@ -161,7 +162,7 @@ FrostShield:Callback(function(spell)
     end
 end)
 
-Evocation:Callback(function(spell)
+Evocation:Callback(function(spell) --figure out how to make this wait 8 seconds so it finishes casting
     if not spell:Castable(player) then return end
     if player.manapct < 5 then
         if spell:Cast() then
