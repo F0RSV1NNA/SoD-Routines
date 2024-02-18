@@ -120,7 +120,8 @@ Pyroblast:Callback(function(spell) --needs improvement, would help if i ever saw
         end
     end]]
     if player.manapct > 30 then
-        if spell:Cast(target) then
+    if not target.inCombat then return end    
+        if spell:Cast(unit) then
             return true
         end
     end
@@ -129,13 +130,14 @@ end)
 
 Scorch:Callback(function(spell)
     if player.manapct > 10 then
+    if not target.inCombat then return end
         if target.debuffRemains(22959) < 30 then
             for i = 1, 5 do
                 if target.debuffStacks(22959) < 5 then
-                    spell:Cast(target)
+                    spell:Cast(unit)
                 else
                     if target.debuffRemains(22959) < 3 then
-                        spell:Cast(target)
+                        spell:Cast(unit)
                     end
                     return
                 end
@@ -146,6 +148,7 @@ end)
 
 Combustion:Callback(function(spell)
     if player.manapct > 50 then
+    if not target.inCombat then return end
         if spell:Cast() then
             return true
         end
@@ -154,6 +157,7 @@ end)
 
 Shoot:Callback(function(spell)
     if player.manapct > 5 then
+    if not target.inCombat then return end
         if not spell.current then
             spell:Cast()
         end
