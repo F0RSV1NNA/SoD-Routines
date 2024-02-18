@@ -12,13 +12,15 @@ mage:Init(function()
 --Just anytime.
     Intellect()
     FrostShield()
-    --Evocation()
+    Evocation()
 
 
  --Polymorph player & Frost nova players in melee range
     if target.player then
-        --FrostNova()
-        --Polymorph()
+        FrostNova()
+        Polymorph()
+        Pyroblast()
+        livingbomb()
     end
 
 -- AoE Rotation    
@@ -35,7 +37,8 @@ mage:Init(function()
     if not settings.AoE then
         if target.enemy then
             --Pyroblast()
-            --Scorch()
+            Scorch()
+            Evocation()
             --Combustion()
             --Shoot()
         end
