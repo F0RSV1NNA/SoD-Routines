@@ -12,13 +12,13 @@ mage:Init(function()
 --Just anytime.
     Intellect()
     FrostShield()
-    Evocation()
+    --Evocation()
 
 
-    --Polymorph player
+ --Polymorph player & Frost nova players in melee range
     if target.player then
-        FrostNova()
-        Polymorph()
+        --FrostNova()
+        --Polymorph()
     end
 
 -- AoE Rotation    
