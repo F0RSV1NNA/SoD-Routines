@@ -7,7 +7,6 @@
 player buffs, Int,Shield\
 Living Flame AOE\
 Living bomb AOE\
-Frost Nova Enemy Players within range\
 GUI On/OFF - AOE ON/OFF\
 
 ## to do.
@@ -16,4 +15,6 @@ Fix Polymorph recasting on players(tried adding to the living bomb table didn't 
 Sort out mana % values for proper order\
 Add blizzard Smart AOE Maybe\
 hit max level so i can add combustion + logic\
-Fix Evocation canceling the cast.
+Fix Evocation canceling the cast.\
+make frost nova not aids and use .around instead\
+fix rotation order.
