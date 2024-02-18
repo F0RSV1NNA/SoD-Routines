@@ -33,9 +33,9 @@ end, "PLAYER_REGEN_ENABLED")
 
 awful.onEvent(function(info, event, source, dest)
     if event ~= "SPELL_AURA_APPLIED" then return end
-    if not (source.isUnit(player) or source.isPlayer) then return end
+    if not source.isUnit(player) then return end
     local _, _, _, _, _, _, _, _, _, _, _, _, spellName = unpack(info)
-    if spellName == livingbomb.name or spellName == Polymorph.name then
+    if spellName == livingbomb.name then
         targetedEnemies[dest.guid] = true
     end
 end)
@@ -94,10 +94,13 @@ FrostNova:Callback(function(spell)
     end
 end)
 
-Polymorph:Callback(function(spell) -- Double casting?? Added to table for 1 time cast.
-    awful.enemies.loop(function(unit, i, uptime)
-        if targetedEnemies[unit.guid] then return end 
+Polymorph:Callback(function(spell)
+    if awful.enemies.find(function(enemy) return enemy.debuff(spell.id, player) end) then return end
+    awful.enemies.loop(function(unit)
+        if unit.inCombat then return end
         if unit.debuff(spell.id) then return end
+        if not spell:Castable(unit) then return end
+        if unit.hp <= 40 then return end
         if spell:Cast(unit) then
             return true
         end
