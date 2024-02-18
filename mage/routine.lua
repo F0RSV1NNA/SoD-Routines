@@ -14,6 +14,13 @@ mage:Init(function()
     Evocation(player)
 
 
+    --Polymorph player
+    if target.player then
+        if player.mana > 30 then
+            Polymorph()
+        end
+    end
+
 -- AoE Rotation    
     if settings.AoE then
         if target.enemy then
@@ -23,8 +30,6 @@ mage:Init(function()
             if player.mana > 50 then
                 LivingFlame()
             end
-        --FrostNova() throwing massive error
-        --Shoot() just not working
         end
     end
 
@@ -34,13 +39,17 @@ mage:Init(function()
     if settings.Single then
         if target.enemy then
             if player.mana > 30 then
-                livingbomb()
+                Pyroblast()
             end
             if player.mana > 50 then
-                LivingFlame()
+                Scorch()
             end
-        --FrostNova() throwing massive error
-        --Shoot() just not working
+            if player.mana > 50 then
+                Combustion()
+            end
+            if player.mana > 50 then
+                Shoot()
+            end
         end
     end
 
