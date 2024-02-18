@@ -7,11 +7,12 @@
 player buffs, Int,Shield\
 Living Flame AOE\
 Living bomb AOE\
+Frost Nova Enemy Players within range\
 GUI On/OFF - AOE ON/OFF\
 
 ## to do.
-Fix Polymorph recasting on players\
-Fix Frost nova not casting/working\
+get scorch casting on target 5 times then maintaining fire vuln debuff. + used for dmg filler during downtime\
+Fix Polymorph recasting on players(tried adding to the living bomb table didn't work).\
 Sort out mana % values for proper order\
 Add blizzard Smart AOE Maybe\
 hit max level so i can add combustion + logic\
