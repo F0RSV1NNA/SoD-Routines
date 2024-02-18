@@ -1,9 +1,9 @@
 {
     "load": [
         "Zmizet.lua",
+        "gui.lua",
         "routine.lua",
-        "spellbook.lua",
-        "gui.lua"
+        "spellbook.lua"
     ]
 }
 

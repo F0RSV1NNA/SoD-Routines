@@ -2,6 +2,7 @@ local Unlocker, awful, project = ...
 local mage = project.mage.aoe
 local player = awful.player
 local settings = project.settings
+local target = awful.target
 
 print("Zmizet AoE Dungeon Mage")
 
@@ -9,47 +10,33 @@ mage:Init(function()
 
 
 --Just anytime.
-    Intellect(player)
-    FrostShield(player)
-    Evocation(player)
+    Intellect()
+    FrostShield()
+    Evocation()
 
 
     --Polymorph player
     if target.player then
-        if player.mana > 30 then
-            Polymorph()
-        end
+         Polymorph()
     end
 
 -- AoE Rotation    
     if settings.AoE then
         if target.enemy then
-            if player.mana > 30 then
-                livingbomb()
-            end
-            if player.mana > 50 then
-                LivingFlame()
-            end
+            livingbomb()
+            LivingFlame()
         end
     end
 
 
 
 -- Single target Rotation
-    if settings.Single then
+    if not settings.AoE then
         if target.enemy then
-            if player.mana > 30 then
-                Pyroblast()
-            end
-            if player.mana > 50 then
-                Scorch()
-            end
-            if player.mana > 50 then
-                Combustion()
-            end
-            if player.mana > 50 then
-                Shoot()
-            end
+            Pyroblast()
+            Scorch()
+            Combustion()
+            Shoot()
         end
     end
 

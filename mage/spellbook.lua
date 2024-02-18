@@ -48,7 +48,7 @@ end)
 --Logic for casting Living Bomb spell on enemies
 
 livingbomb:Callback(function(spell)
-    if player.mana > 30 then
+    if player.manapct > 30 then
         awful.enemies.loop(function(unit, i, uptime)
             if targetedEnemies[unit.guid] then return end 
             if not spell:Castable(unit) then return end
@@ -65,7 +65,7 @@ end)
 
 LivingFlame:Callback(function(spell)
     if not spell:Castable(player) then return end
-    if player.mana > 50 then
+    if player.manapct > 50 then
         local function sort(a, b) return a.hp > b.hp end
         awful.enemies.sort(sort).loop(function(unit, i, uptime)
             if unit.hp <= 60 then return end
@@ -105,7 +105,7 @@ Pyroblast:Callback(function(spell) --improve this. its shit...i think.
             return true
         end
     end]]
-    if player.mana > 30 then
+    if player.manapct > 30 then
         if spell:Cast(target) then
             return true
         end
@@ -114,7 +114,7 @@ end)
 
 
 Scorch:Callback(function(spell)
-    if player.mana > 10 then
+    if player.manapct > 10 then
         for i = 1, 5 do -- cast 5 times?
             if not spell:Cast(target) then
                 return
@@ -125,7 +125,7 @@ end)
 
 
 Combustion:Callback(function(spell)
-    if player.mana > 50 then
+    if player.manapct > 50 then
         if spell:Cast() then
             return true
         end
@@ -133,7 +133,7 @@ Combustion:Callback(function(spell)
 end)
 
 Shoot:Callback(function(spell)
-    if player.mana > 5 then
+    if player.manapct > 5 then
         if not spell.current then
             spell:Cast()
         end
@@ -163,7 +163,7 @@ end)
 
 Evocation:Callback(function(spell)
     if not spell:Castable(player) then return end
-    if player.mana < 5 then
+    if player.manapct < 5 then
         if spell:Cast() then
             return true
         end
