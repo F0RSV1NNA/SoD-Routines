@@ -9,7 +9,7 @@ Living Flame AOE\
 Living bomb AOE\
 GUI On/OFF - AOE ON/OFF\
 
-##to do.
+## to do.
 Fix Polymorph recasting on players\
 Fix Frost nova not casting/working\
 Sort out mana % values for proper order\
