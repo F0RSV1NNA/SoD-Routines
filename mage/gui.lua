@@ -12,17 +12,4 @@ local gui, settings, cmd = awful.UI:New("example", {
 	}
 })
 
-local example = gui:Tab("Example")
-example:Button({
-	text = "Enable",
-	var = "enable",
-	icon = icon.id,
-	default = true
-})
-
-example:Button({
-	text = "AOE",
-	var = "aoe",
-	icon = icon.id,
-	default = true
-})
+project.settings = settings
