@@ -12,8 +12,9 @@ Scorch Stack 5\
 Frost Nova\
 
 ## to do.
-Maybe make poly not cast on the same player twice (bomb logic??)\
+Make poly not cast on players inCombat\
 Sort out mana % values and times for proper order\
 hit max level so i can add combustion + logic\
-Fix Evocation canceling the cast.\
-
+Fix Evocation canceling the cast. maybe impossible...\
+Optimize and organize\
+sort out player,unit,enemy on if statements\

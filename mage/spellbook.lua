@@ -61,7 +61,6 @@ LivingFlame:Callback(function(spell)
         local function sort(a, b) return a.hp > b.hp end
         awful.enemies.sort(sort).loop(function(unit, i, uptime)
             if unit.hp <= 60 then return end
-            if not spell:Castable(unit) then return end
             if spell:Cast(unit) then
                 return true
             end
@@ -72,8 +71,11 @@ end)
 
 --PvP
 FrostNova:Callback(function(spell)
-    if awful.enemies.around(player, 5, function(enemy) return enemy.isPlayer end) >= 1 then
-        spell:Cast()
+    if player.manapct > 20 then
+        if not spell:Castable(unit) then return end
+        if awful.enemies.around(player, 5, function(enemy) return enemy.isPlayer end) >= 1 then
+            spell:Cast()
+        end
     end
 end)
 
@@ -83,7 +85,7 @@ Polymorph:Callback(function(spell)
     awful.enemies.loop(function(unit)
         if unit.inCombat then return end
         if unit.debuff(spell.id) then return end
-        if not spell:Castable(unit) then return end
+        if not spell:Castable(player) then return end
         if unit.hp <= 40 then return end
         if spell:Cast(unit) then
             return true
@@ -97,7 +99,7 @@ end)
 Pyroblast:Callback(function(spell) --needs improvement, would help if i ever saw pyroblast proc.
     if not spell:Castable(player) then return end
     if player.buff(400625) then
-        if spell:Cast(target) then
+        if spell:Cast(unit) then
             return true
         end
     end
@@ -125,6 +127,7 @@ end)
 
 Combustion:Callback(function(spell)
     if player.manapct > 50 then
+    if not spell:Castable(player) then return end
     if not target.inCombat then return end
         if spell:Cast() then
             return true
