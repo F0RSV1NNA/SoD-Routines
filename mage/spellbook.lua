@@ -13,7 +13,6 @@ awful.Populate({
     --AoE
     LivingFlame = Spell(401556,{castByID = true, ranged = true, ignoreChanneling = false}),
     livingbomb = Spell(400613,{castByID = true, ranged = true, ignoreChanneling = false}),
-    Blizzard = Spell(10,{castByID = true, ranged = true, ignoreChanneling = false}),
     --DMG
     Pyroblast = Spell(11366,{castByID = true, ranged = true, ignoreChanneling = false}),
     Scorch = Spell(2948,{castByID = true, ranged = true, ignoreChanneling = false}),
@@ -70,16 +69,6 @@ LivingFlame:Callback(function(spell)
                 return true
             end
         end)
-    end
-end)
-
-Blizzard:Callback(function(spell)
-    if awful.enemies.around(target, 8) >= 2 then
-        local x, y, z = spell:SmartAoEPosition(target, {radius = 8})
-        if x and spell:Castable() then
-            spell:AoECast(x, y, z)
-            return true
-        end
     end
 end)
 
