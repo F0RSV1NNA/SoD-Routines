@@ -12,9 +12,8 @@ Scorch Stack 5\
 Frost Nova\
 
 ## to do.
-Fix Polymorph recasting on players(tried adding to the living bomb table didn't work).\
-Sort out mana % values for proper order\
+Maybe make poly not cast on the same player twice (bomb logic??)\
+Sort out mana % values and times for proper order\
 hit max level so i can add combustion + logic\
 Fix Evocation canceling the cast.\
-make frost nova not aids and use .around instead\
-fix rotation order.
+

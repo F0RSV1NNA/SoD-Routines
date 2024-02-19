@@ -8,16 +8,18 @@ print("Zmizet AoE Dungeon Mage")
 
 mage:Init(function()
    
-    if player.channeling then return end
---Just anytime.
+    if player.channeling or awful.time - project.EvoCasted < 0.5 then return end
+
+    --beneficial
     Intellect()
     FrostShield()
     Evocation()
 
 
- --Polymorph player & Frost nova players in melee range
+
+    --PvP Scenerio
+
     if target.player then
-        if player.channeling then return end
         FrostNova()
         Polymorph()
         --Pyroblast()
@@ -25,9 +27,10 @@ mage:Init(function()
         livingbomb()
     end
 
--- AoE Rotation    
+
+    -- AoE Rotation
+
     if settings.AoE then
-        if player.channeling then return end
         if target.enemy then
             livingbomb()
             LivingFlame()
@@ -35,10 +38,9 @@ mage:Init(function()
     end
 
 
+    -- Single target Rotation
 
--- Single target Rotation
     if not settings.AoE then
-        if player.channeling then return end
         if target.enemy then
             --Pyroblast()
             Scorch()

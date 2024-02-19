@@ -17,9 +17,7 @@ awful.Populate({
     Pyroblast = Spell(11366,{castByID = true, ranged = true, ignoreChanneling = false}),
     Scorch = Spell(2948,{castByID = true, ranged = true, ignoreChanneling = false}),
     Combustion = Spell(400613,{castByID = true, ranged = true, ignoreChanneling = false}),
-    Shoot = Spell(5019,{castByID = true, ranged = true, targeted = true, ignoreChanneling = false})
 }, aoe, getfenv(1))
-
 
 
 local targetedEnemies = {}
@@ -38,7 +36,6 @@ awful.onEvent(function(info, event, source, dest)
         targetedEnemies[dest.guid] = true
     end
 end)
-
 
 
 --AOE
@@ -72,6 +69,7 @@ LivingFlame:Callback(function(spell)
     end
 end)
 
+
 --PvP
 FrostNova:Callback(function(spell)
     if awful.enemies.around(player, 5, function(enemy) return enemy.isPlayer end) >= 1 then
@@ -94,9 +92,7 @@ Polymorph:Callback(function(spell)
 end)
 
 
-
 --damage filler spells
-
 
 Pyroblast:Callback(function(spell) --needs improvement, would help if i ever saw pyroblast proc.
     if not spell:Castable(player) then return end
@@ -112,7 +108,6 @@ Pyroblast:Callback(function(spell) --needs improvement, would help if i ever saw
         end
     end
 end)
-
 
 Scorch:Callback(function(spell)
     if player.manapct > 10 then
@@ -137,19 +132,6 @@ Combustion:Callback(function(spell)
     end
 end)
 
-Shoot:Callback(function(spell)
-    if player.manapct > 5 then
-    if not target.inCombat then return end
-        if not spell.current then
-            spell:Cast()
-        end
-    end
-end)
-
-
-
-
-
 
 --buffs 
 
@@ -171,10 +153,12 @@ FrostShield:Callback(function(spell)
     end
 end)
 
+project.EvoCasted = 0
 Evocation:Callback(function(spell)
     if player.manapct < 10 then
     if not spell:Castable(player) then return end
         if spell:Cast() then
+            project.EvoCasted = awful.time
             return true
         end
     end
