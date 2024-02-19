@@ -1,0 +1,9 @@
+{
+    "load": [
+        "mage/Zmizet.lua",
+        "mage/gui.lua",
+        "mage/routine.lua",
+        "mage/spellbook.lua"
+    ]
+}
+
