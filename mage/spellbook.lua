@@ -118,10 +118,10 @@ Scorch:Callback(function(spell)
     if player.manapct > 10 then
         if target.inCombat then
             if target.debuffStacks(22959) < 5 then
-                spell:Cast(unit)
+                spell:Cast(target)
             elseif target.debuffStacks(22959) == 5 then
                 if target.debuffRemains(22959) < 8 then
-                    spell:Cast(unit)
+                    spell:Cast(target)
                 end
             end
         end
