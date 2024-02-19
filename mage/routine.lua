@@ -7,7 +7,7 @@ local target = awful.target
 print("Zmizet AoE Dungeon Mage")
 
 mage:Init(function()
-
+    if player.channeling then return end
 
 --Just anytime.
     Intellect()
@@ -38,7 +38,6 @@ mage:Init(function()
         if target.enemy then
             --Pyroblast()
             Scorch()
-            Evocation()
             --Combustion()
             --Shoot()
         end
