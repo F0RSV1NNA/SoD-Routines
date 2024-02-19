@@ -84,12 +84,8 @@ Blizzard:Callback(function(spell)
 end)
 
 --PvP
-
 FrostNova:Callback(function(spell)
-    local enemiesInMeleeRange = awful.enemies.filter(function(obj)
-        return obj.distance <= 5 and obj.isPlayer
-    end)
-    if #enemiesInMeleeRange >= 1 then
+    if awful.enemies.around(player, 5, function(enemy) return enemy.isPlayer end) >= 1 then
         spell:Cast()
     end
 end)
