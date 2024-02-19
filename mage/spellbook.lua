@@ -80,6 +80,7 @@ FrostNova:Callback(function(spell)
 end)
 
 Polymorph:Callback(function(spell)
+    if player.castingid == Polymorph.id then return end -- Try adding this and see if it's enough to stop it from happening, if not, we go advanced
     if awful.enemies.find(function(enemy) return enemy.debuff(spell.id, player) end) then return end
     awful.enemies.loop(function(unit)
         if unit.inCombat then return end
@@ -99,11 +100,11 @@ end)
 
 Pyroblast:Callback(function(spell) --needs improvement, would help if i ever saw pyroblast proc.
     if not spell:Castable(player) then return end
-    --[[if player.buff(spell.name) then
+    if player.buff(400625) then
         if spell:Cast(target) then
             return true
         end
-    end]]
+    end
     if player.manapct > 30 then
     if not target.inCombat then return end    
         if spell:Cast(unit) then
@@ -115,16 +116,12 @@ end)
 
 Scorch:Callback(function(spell)
     if player.manapct > 10 then
-    if not target.inCombat then return end
-        if target.debuffRemains(22959) < 30 then
-            for i = 1, 5 do
-                if target.debuffStacks(22959) < 5 then
+        if target.inCombat then
+            if target.debuffStacks(22959) < 5 then
+                spell:Cast(unit)
+            elseif target.debuffStacks(22959) == 5 then
+                if target.debuffRemains(22959) < 8 then
                     spell:Cast(unit)
-                else
-                    if target.debuffRemains(22959) < 3 then
-                        spell:Cast(unit)
-                    end
-                    return
                 end
             end
         end
