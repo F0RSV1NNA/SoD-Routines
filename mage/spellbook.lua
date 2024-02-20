@@ -4,19 +4,20 @@ local player = awful.player
 local Spell = awful.Spell
 
 awful.Populate({
-    Intellect = Spell(1460,{beneficial = true, castByID = true, ignoreChanneling = false}),
-    FrostShield = Spell(7301,{beneficial = true, castByID = true, ignoreChanneling = false}),
-    Evocation = Spell(12051,{castByID = true, ignoreChanneling = false}),
+    Intellect = Spell(1460,{beneficial = true, castByID = true}),
+    FrostShield = Spell(7301,{beneficial = true, castByID = true}),
+    Evocation = Spell(12051,{castByID = true}),
     --cc
-    FrostNova = Spell(865,{castByID = true, ranged = true, ignoreChanneling = false}),
-    Polymorph = Spell(12824,{castByID = true, ranged = true, ignoreChanneling = false}),
+    FrostNova = Spell(865,{castByID = true, ranged = true}),
+    Polymorph = Spell(12824,{castByID = true, ranged = true}),
     --AoE
-    LivingFlame = Spell(401556,{castByID = true, ranged = true, ignoreChanneling = false}),
-    livingbomb = Spell(400613,{castByID = true, ranged = true, ignoreChanneling = false}),
+    LivingFlame = Spell(401556,{castByID = true, ranged = true}),
+    livingbomb = Spell(400613,{castByID = true, ranged = true}),
     --DMG
-    Pyroblast = Spell(11366,{castByID = true, ranged = true, ignoreChanneling = false}),
-    Scorch = Spell(2948,{castByID = true, ranged = true, ignoreChanneling = false}),
-    Combustion = Spell(400613,{castByID = true, ranged = true, ignoreChanneling = false}),
+    wand = awful.Spell(5019,{castByID = true, ranged = true}),
+    Pyroblast = Spell(11366,{castByID = true, ranged = true}),
+    Scorch = Spell(2948,{castByID = true, ranged = true}),
+    Combustion = Spell(400613,{castByID = true, ranged = true}),
 }, aoe, getfenv(1))
 
 
@@ -83,7 +84,7 @@ Polymorph:Callback(function(spell)
     if player.castingid == Polymorph.id then return end -- Try adding this and see if it's enough to stop it from happening, if not, we go advanced
     if awful.enemies.find(function(enemy) return enemy.debuff(spell.id, player) end) then return end
     awful.enemies.loop(function(unit)
-        if unit.inCombat then return end
+        if unit.Combat then return end
         if unit.debuff(spell.id) then return end
         if not spell:Castable(player) then return end
         if unit.hp <= 40 then return end
@@ -94,7 +95,7 @@ Polymorph:Callback(function(spell)
 end)
 
 
---damage filler spells
+--damage spells
 
 Pyroblast:Callback(function(spell) --needs improvement, would help if i ever saw pyroblast proc.
     if not spell:Castable(player) then return end
@@ -135,6 +136,10 @@ Combustion:Callback(function(spell)
     end
 end)
 
+wand:Callback(function(spell)
+    if not target.enemy or target.dead or player.moving or IsAutoRepeatSpell(spell.name) then return end
+    spell:Cast(target)
+end)
 
 --buffs 
 
