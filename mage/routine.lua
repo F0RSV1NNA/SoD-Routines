@@ -2,13 +2,13 @@ local Unlocker, awful, project = ...
 local mage = project.mage.aoe
 local player = awful.player
 local settings = project.settings
-local target = awful.target
+local player, target = awful.player, awful.target
 
-print("Zmizet AoE Dungeon Mage")
+print("[|cffFF6B33Zmizet|r AoE |cff3FC7EBMage|r]")
 
 mage:Init(function()
-   
-    if player.channeling or awful.time - project.EvoCasted < 0.5 then return end
+    if player.mounted then return end 
+    if player.casting or player.channeling then return end
 
     --beneficial
     Intellect()
@@ -22,7 +22,7 @@ mage:Init(function()
     if target.player then
         FrostNova()
         Polymorph()
-        --Pyroblast()
+        Pyroblast()
         Scorch()
         livingbomb()
     end
@@ -42,10 +42,10 @@ mage:Init(function()
 
     if not settings.AoE then
         if target.enemy then
-            --Pyroblast()
+            Pyroblast()
             Scorch()
             --Combustion()
-            --Shoot()
+            Shoot()
         end
     end
 

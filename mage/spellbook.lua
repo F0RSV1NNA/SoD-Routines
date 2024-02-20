@@ -1,6 +1,6 @@
 local Unlocker, awful, project = ...
 local aoe = project.mage.aoe
-local player = awful.player
+local player, target = awful.player, awful.target
 local Spell = awful.Spell
 
 awful.Populate({
@@ -71,17 +71,14 @@ end)
 
 
 --PvP
-FrostNova:Callback(function(spell)
-    if player.manapct > 20 then
-        if not spell:Castable(unit) then return end
-        if awful.enemies.around(player, 5, function(enemy) return enemy.isPlayer end) >= 1 then
-            spell:Cast()
-        end
+frostNova:Callback(function(spell)
+    if awful.enemies.around(player, 10, function(unit) return not unit.rooted end) > 0 then
+        spell:Cast()
     end
 end)
 
 Polymorph:Callback(function(spell)
-    if player.castingid == Polymorph.id then return end -- Try adding this and see if it's enough to stop it from happening, if not, we go advanced
+    if player.castingid == Polymorph.id then return end
     if awful.enemies.find(function(enemy) return enemy.debuff(spell.id, player) end) then return end
     awful.enemies.loop(function(unit)
         if unit.Combat then return end
@@ -146,7 +143,7 @@ end)
 Intellect:Callback(function(spell)
     if not player.buff(spell.name) then
     if not spell:Castable(player) then return end
-        if spell:Cast(player) then
+        if spell:Cast() then
             return true
         end
     end
@@ -155,18 +152,16 @@ end)
 FrostShield:Callback(function(spell)
     if not player.buff(spell.name) then
     if not spell:Castable(player) then return end
-        if spell:Cast(player) then
+        if spell:Cast() then
             return true
         end
     end
 end)
 
-project.EvoCasted = 0
 Evocation:Callback(function(spell)
     if player.manapct < 10 then
     if not spell:Castable(player) then return end
         if spell:Cast() then
-            project.EvoCasted = awful.time
             return true
         end
     end
