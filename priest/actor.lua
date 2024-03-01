@@ -1,5 +1,5 @@
 local Unlocker, awful, project = ...
-local shadow = project.p.s
+local shadow = project.priest.shadow
 local settings = project.settings
 local player, target = awful.player, awful.target
 
@@ -11,7 +11,7 @@ shadow:Init(function()
 
     if player.mounted then return end 
     if channeling then return end
-    
+
     --beneficial
     fort()
     shield()

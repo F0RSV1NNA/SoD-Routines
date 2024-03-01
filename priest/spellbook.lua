@@ -1,5 +1,5 @@
 local Unlocker, awful, project = ...
-local p = project.p.s
+local priest = project.priest.shadow
 local player, target = awful.player, awful.target
 local Spell = awful.Spell
 
@@ -15,7 +15,7 @@ awful.Populate({
     pain = awful.Spell(589,{castByID = true, ranged = true}),
     voidplague = awful.Spell(425204,{castByID = true, ranged = true}),
     smite = awful.Spell(591,{castByID = true, ranged = true}),
-}, p, getfenv(1))
+}, priest, getfenv(1))
 
 
 --[[
