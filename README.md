@@ -1,6 +1,8 @@
-# Season Of Discovery mage rotation.
+# Season Of Discovery rotations.
 
-### Not currenting working.
+### Not currenting finished..
+
+#Mage 
 
 ## Working : 
 
@@ -19,3 +21,15 @@ Sort out mana % values and times for proper order\
 hit max level so i can add combustion + proc logic\
 Add blizzard smart AOE for 3+ units/enemies\
 sort out player,unit,enemy on if statements\
+
+#Priest
+
+## Working : 
+
+not even fucking close.
+
+## to do.
+
+a ton.\
+
+### to use either spec you must remove the parent folder, like removing the priest folder otherwise they will double load...
