@@ -4,7 +4,7 @@ local player = awful.player
 local settings = project.settings
 local player, target = awful.player, awful.target
 local channeling = ChannelInfo()
-if channeling then return end
+
 print("[|cffFF6B33Zmizet|r AoE |cff3FC7EBMage|r]")
 
 mage:Init(function()
