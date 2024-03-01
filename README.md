@@ -9,7 +9,7 @@ Living Flame AOE\
 Living bomb AOE\
 GUI On/OFF - AOE ON/OFF\
 Scorch Stack 5\
-Frost Nova\
+Frost Nova
 
 ## to do.
 Make poly not cast on players inCombat\
