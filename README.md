@@ -23,15 +23,15 @@ Add blizzard smart AOE for 3+ units/enemies\
 sort out player,unit,enemy on if statements
 
 # Priest
-(i am level 12 more added as the higher level i reach.)\
+(i am level 12 more added as the higher level i reach.)
 
 ## Working : 
 
 Scream if player in melee range.\
-Buffs for player(not friends however)\
+Buffs for player(not friends however)
 
 ## to do.
 
-a ton.\
+a ton.
 
 ### to use either spec you must remove the parent folder, like removing the priest folder otherwise they will double load...
