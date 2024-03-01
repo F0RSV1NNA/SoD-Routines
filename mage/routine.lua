@@ -8,7 +8,6 @@ print("[|cffFF6B33Zmizet|r AoE |cff3FC7EBMage|r]")
 
 mage:Init(function()
     if player.mounted then return end 
-    if player.casting or player.channeling then return end
 
     --beneficial
     Intellect()
@@ -21,9 +20,9 @@ mage:Init(function()
 
     if target.player then
         FrostNova()
-        Polymorph()
-        Pyroblast()
-        Scorch()
+        --Polymorph()
+        --Pyroblast()
+        --Scorch()
         livingbomb()
     end
 
@@ -42,10 +41,10 @@ mage:Init(function()
 
     if not settings.AoE then
         if target.enemy then
-            Pyroblast()
-            Scorch()
+            --Pyroblast()
+            --Scorch()
             --Combustion()
-            Shoot()
+            --Shoot()
         end
     end
 
