@@ -1,15 +1,17 @@
 local Unlocker, awful, project = ...
 local shadow = project.p.s
-local player = awful.player
 local settings = project.settings
 local player, target = awful.player, awful.target
 
 print("[|cffFF6B33Zmizet|r  |cff3FC7EBPriest|r]")
 
 shadow:Init(function()
-    if player.mounted then return end 
-    if player.casting or player.channeling then return end
 
+    local channeling = ChannelInfo()
+
+    if player.mounted then return end 
+    if channeling then return end
+    
     --beneficial
     fort()
     shield()
@@ -18,7 +20,7 @@ shadow:Init(function()
     --PvP Scenerio
 
     if target.player then
-        --scream()
+        scream()
     end
 
 

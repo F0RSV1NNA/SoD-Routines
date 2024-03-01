@@ -7,9 +7,9 @@ awful.Populate({
     shield = awful.Spell(17,{castByID = true}),
     fort = awful.Spell(1243,{beneficial = true, castByID = true}),
     --cc
-   -- scream = Spell(865,{castByID = true, ranged = true}),
+    scream = Spell(865,{castByID = true, ranged = true}),
     --AoE
-    --livingbomb = Spell(400613,{castByID = true, ranged = true}),
+
     --DMG
     penance = awful.Spell(402174,{castByID = true, ranged = true}),
     pain = awful.Spell(589,{castByID = true, ranged = true}),
@@ -58,14 +58,15 @@ end)
 
 
 --PvP
---[[
+
 scream:Callback(function(spell)
-    if awful.enemies.around(player, 10, function(unit) return not unit.rooted end) > 0 then
-        spell:Cast()
+    if player.manapct > 20 then
+        if not spell:Castable(unit) then return end
+        if awful.enemies.around(player, 5, function(enemy) return enemy.isPlayer end) >= 1 then
+            spell:Cast()
+        end
     end
 end)
---]]
-
 
 
 --damage spells
@@ -82,6 +83,7 @@ pain:Callback(function(spell)
         end)
     end
 end)
+
 voidplague:Callback(function(spell)
     if target.Combat then
         awful.enemies.loop(function(unit, i, uptime)
