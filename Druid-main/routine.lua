@@ -33,7 +33,6 @@ druid:Init(function()
   Regrowth()
   Rejuvenation()
   Lifebloom()
-  Swiftmend()
 
 
 end)

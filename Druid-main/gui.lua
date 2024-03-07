@@ -27,7 +27,7 @@ project.settings = settings
 
 
 StatusFrame:Button({
-	spellId = 6603,
+	spellId = 1126,
 	text = {
 	  enabled = awful.colors.green .. "Enabled",
 	  disabled = awful.colors.red .. "Disabled"
@@ -62,7 +62,7 @@ StatusFrame:Button({
 		disabled = awful.colors.red .. "DMG"
 	  },
 	textSize = 8,
-	spellId = 10,
+	spellId = 287712,
 	var = "DMG",
 	onClick = function()
 	  awful.print(settings.DMG and "DMG ON |cff5fd729On" or "DMG OFF |cfff44336Off")
