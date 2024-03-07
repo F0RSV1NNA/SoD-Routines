@@ -29,14 +29,14 @@ project.settings = settings
 StatusFrame:Button({
 	spellId = 6603,
 	text = {
-	  enabled = awful.colors.cyan .. "Enabled",
+	  enabled = awful.colors.green .. "Enabled",
 	  disabled = awful.colors.red .. "Disabled"
 	},
 	textSize = 8,
 	var = "on",
 	onClick = function()
 	  awful.enabled = not awful.enabled
-	  awful.print(awful.enabled and "|cff5fd729enabled" or "|cfff44336disabled")
+	  awful.print(awful.enabled and "|cff5fd729Enabled" or "|cfff44336Disabled")
 	end,
 	size = 32,
 	padding = 0
@@ -58,14 +58,14 @@ StatusFrame:Button({
 
   StatusFrame:Button({
 	text = {
-		enabled = awful.colors.cyan .. "AoE",
-		disabled = awful.colors.red .. "AoE"
+		enabled = awful.colors.green .. "DMG",
+		disabled = awful.colors.red .. "DMG"
 	  },
 	textSize = 8,
 	spellId = 10,
-	var = "AoE",
+	var = "DMG",
 	onClick = function()
-	  awful.print(settings.AoE and "AOE |cff5fd729On" or "AOE |cfff44336Off")
+	  awful.print(settings.DMG and "DMG ON |cff5fd729On" or "DMG OFF |cfff44336Off")
 	end,
 	size = 32,
 	padding = 0

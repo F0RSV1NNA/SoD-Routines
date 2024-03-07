@@ -1,8 +1,0 @@
-{
-    "load": [
-        "ZmizPriest.lua",
-        "gui.lua",
-        "actor.lua",
-        "spellbook.lua"
-    ]
-}
