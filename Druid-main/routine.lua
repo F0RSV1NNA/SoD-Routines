@@ -30,8 +30,10 @@ druid:Init(function()
   MarkOfWild()
 
   SetLowest()
-  Rejuvenation()
   Regrowth()
+  Rejuvenation()
+  Lifebloom()
+  Swiftmend()
 
 
 end)

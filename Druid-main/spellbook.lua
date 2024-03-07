@@ -5,12 +5,9 @@ local Spell = awful.Spell
 
 awful.Populate({
     --buffs
-
-    MarkOfWild = Spell(1126,{beneficial = true, castByID = true}), 
+    MarkOfWild = Spell(1126,{beneficial = true, castByID = true}),
     --AoE
     WildGrowth = Spell(48438, {heal = true, AoE = true, castByID = true}),
-
-
     --heals
     Lifebloom  = Spell(33763, {heal = true, castByID = true}),
     Regrowth = Spell(8936, {heal = true, castByID = true}),
@@ -20,8 +17,35 @@ awful.Populate({
 }, resto, getfenv(1))
 
 Rejuvenation:Callback(function(spell)
-    if project.Lowest.hp < 90 and not project.Lowest:HasBuff(774) then
-        return spell:Cast(project.Lowest)
+    if project.Lowest.hp < 95 then
+    if not player.buff(spell.name) then
+        if not spell:Castable(player) then return end
+        if spell:Cast(project.Lowest) then
+             return true
+            end
+        end
+    end
+end)
+
+Lifebloom:Callback(function(spell)
+    if project.Lowest.hp < 80 then
+        if not player.buff(spell.name) then
+            if not spell:Castable(player) then return end
+            if spell:Cast(project.Lowest) then
+                return true
+            end
+        end
+    end
+end)
+
+Swiftmend:Callback(function(spell)
+    if project.Lowest.hp < 80 then
+        if player.buff(774) then
+            if not spell:Castable(player) then return end
+            if spell:Cast(project.Lowest) then
+                return true
+            end
+        end
     end
 end)
 
