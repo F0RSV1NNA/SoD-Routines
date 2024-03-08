@@ -1,7 +1,0 @@
-{
-    "load": [
-        "gui.lua",
-        "routine.lua",
-        "spellbook.lua"
-    ]
-}
